@@ -1,0 +1,56 @@
+{
+	"lang": "ar",
+	"name": "ahadith",
+	"version": "0.0.1",
+	"spacy_version": ">=2.2.4",
+	"description": "A NER and textcat model trained on 29,288 (5,784 of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
+	"author": "Umar Butler",
+	"email": "umar@umarbutler.com",
+	"url": "https://github.com/umarbutler/pyhadith",
+	"sources": [
+	  "Saudi Arabian Permanent Committee for Scholarly Research and Ifta"
+	],
+	"license": "GPLv3",
+	"vectors": {
+	  "width": 0,
+	  "vectors": 0,
+	  "keys": 0,
+	  "name": "spacy_pretrained_vectors"
+	},
+	"pipeline": [
+	  "ner",
+	  "textcat"
+	],
+	"factories": {
+	  "ner": "ner",
+	  "textcat": "textcat"
+	},
+	"labels": {
+	  "ner": [
+		"RAWINAME"
+	  ],
+	  "textcat": [
+		"khabar",
+		"athar"
+	  ]
+	},
+	"accuracy": {
+	  "token_acc": 99.993094621,
+	  "ents_f": 98.9414602925,
+	  "ents_p": 98.9633861079,
+	  "ents_r": 98.9195441904,
+	  "ents_per_type": {
+		"RAWINAME": {
+		  "p": 98.9633861079,
+		  "r": 98.9195441904,
+		  "f": 98.9414602925
+		}
+	  },
+	  "textcat_score": 97.7843155282
+	},
+	"speed": {
+	  "cpu": 17333.4572427062,
+	  "gpu": 10577.6885539858,
+	  "nwords": 405481
+	}
+  }

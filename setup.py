@@ -1,0 +1,33 @@
+# Import setup tools
+import setuptools
+
+# Set up long description
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+# Setuptools setup
+
+setuptools.setup(
+    name="pyHadith",
+    version="0.0.1",
+    author="Umar Butler",
+    author_email="umar@umarbutler.com",
+    description="A package which automatically segments and classifies ahadith.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/umarbutler/pyhadith",
+    packages=setuptools.find_packages(),
+    keywords='ahadith hadith isnad nlp arabic',
+    classifiers=[
+		"Development Status :: 2 - Pre-Alpha",
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+		"Intended Audience :: Science/Research",
+		"License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+		"Natural Language :: Arabic",
+		"Topic :: Text Processing"
+    ],
+    python_requires='>=3.6',
+    install_requires=["spacy==2.2.4","nltk>=3.4.5","pyarabic>=0.6.7"],
+    include_package_data=True
+)
