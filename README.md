@@ -42,13 +42,13 @@ The pre-processor strips away punctuation and extra white space.
 
 The pre-processor also uses [Motaz Saad](https://github.com/motazsaad)'s '[split-waw-arabic](https://github.com/motazsaad/split-waw-arabic)' method to identify and add whitespaces after the word 'وَ'. This is necessary to differentiate between the letter 'و‎' and the word 'وَ' (meaning 'and'), which is joined to words.
 
-### 1.3. Hadith Deconstruction Algorithm
-
-To deconstruct a hadith into a matn and an isnad, a custom algorithm is employed. The algorithm assumes that a matn has begun at the final occurrence of a narrator's name. Everything before the matn is classed as the isnad.
-
-### 1.4. Rawa Post-Processor
+### 1.3. Rawa Post-Processor
 
 To ensure that the names extracted by the *rawa* model are accurate, a post-processor looks for common joining terms at the beginning of each name. If a common joining term is found, it is removed from the name.
+
+### 1.4. Hadith Deconstruction Algorithm
+
+To deconstruct a hadith into a matn and an isnad, a custom algorithm is employed. The algorithm assumes that a matn has begun at the final occurrence of a narrator's name (identified by the *rawa* model). Everything before the matn is classed as the isnad.
 
 ### 1.5. Asnad Reconstruction Algorithm
 
