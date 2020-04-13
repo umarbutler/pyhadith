@@ -23,7 +23,7 @@ The results of the final models are displayed in the table below:
 
 | Model | Model Type | Precision | Recall | F-Score |
 |--|--|--|--|--|
-| Rawa  | Named Entity Recognition | 98.96 | 98.91 | 98.94 |
+| Rawa  | Named Entity Recognition | 98.88 | 99 | 98.94 |
 | Asl   | Text Classification |  |  | 97.82 |
 
 ### 1.2. Asnad Reconstruction Algorithm
