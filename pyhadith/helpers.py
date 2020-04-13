@@ -81,10 +81,10 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
-def ahadith(text, words):
-	"""Uses the ahadith spaCy model to return a deconstructed and standardised hadith object."""
+def ahadith(text, arabicwords):
+	"""Uses the rawa and asl spaCy models to return a deconstructed and standardised hadith object."""
 
-	doc = connector.process(text, 'ahadith')
+	doc = connector.process(text, 'rawa')
 	# Init the hadith object.
 	hadith = {
 		"isnad" : {
@@ -101,13 +101,14 @@ def ahadith(text, words):
 		"category" : {"name" :"", "score" : ""},
 	}
 
+	catsDoc = connector.process(text, 'asl')
 	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
-	if doc.cats['athar'] > doc.cats['khabar']:
+	if catsDoc.cats['athar'] > catsDoc.cats['khabar']:
 		hadith['category']['name'] = 'athar'
-		hadith['category']['score'] = doc.cats['athar']
+		hadith['category']['score'] = catsDoc.cats['athar']
 	else:
 		hadith['category']['name'] = 'khabar'
-		hadith['category']['score'] = doc.cats['khabar']
+		hadith['category']['score'] = catsDoc.cats['khabar']
 	
 	# Segment the hadith into an isnad at the last occurance of a narrator's name.
 	lastIsnadEnd = len(text)-1
@@ -192,7 +193,7 @@ def ahadith(text, words):
 			if narratorCount == 1:
 				parents = None
 			# If prev. item is OUT and is wa, assume parents of previous narrator.
-			elif IOisnad[count-2]['label'] == 'OUT' and isWa(" ".join(IOisnad[count-2]['raw'].split()).split(' ')[0], words):
+			elif IOisnad[count-2]['label'] == 'OUT' and isWa(" ".join(IOisnad[count-2]['raw'].split()).split(' ')[0], arabicwords):
 				parents = hadith['isnad']['narrators'][narratorCount-2]['parents']
 			# Else, look for parents.
 			else:
@@ -212,7 +213,7 @@ def ahadith(text, words):
 						if possibleCounter != len(possibleParents):
 							# If the succeeding item is RAWI, or is not Wa, break.
 							succParent = possibleParents[possibleCounter]
-							if succParent['label'] == 'RAWI' or isWa(" ".join(succParent['raw'].split()).split(' ')[0], words) == False:
+							if succParent['label'] == 'RAWI' or isWa(" ".join(succParent['raw'].split()).split(' ')[0], arabicwords) == False:
 								break
 				
 				# Assign parents.

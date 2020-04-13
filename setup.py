@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyHadith",
-    version="0.0.2",
+    version="0.0.3",
     author="Umar Butler",
     author_email="umar@umarbutler.com",
     description="A package which automatically segments and classifies ahadith.",
@@ -30,5 +30,5 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=["spacy==2.2.4","nltk>=3.4.5","pyarabic>=0.6.7"],
     include_package_data=True,
-    download_url="https://github.com/umarbutler/pyhadith/archive/v0.0.2-pre_alpha.tar.gz"
+    download_url="https://github.com/umarbutler/pyhadith/archive/v0.0.3.tar.gz"
 )

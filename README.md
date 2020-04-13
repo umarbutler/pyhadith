@@ -1,11 +1,19 @@
 # pyHadith
+
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) 
+[![PyUp](https://pyup.io/repos/github/umarbutler/pyhadith/shield.svg)](https://pyup.io/account/repos/github/umarbutler/pyhadith/yt2mp3/) 
+[![PyPi Version](https://img.shields.io/pypi/v/pyhadith.svg)](https://pypi.python.org/pypi/pyhadith/) 
+[![Python Versions](https://img.shields.io/pypi/pyversions/yt2mp3.svg)](https://pypi.python.org/pypi/yt2mp3/)
+
 pyHadith is a python package which automatically segments and categorizes ahadith.
 
 The package works by feeding raw text to custom natural language processing (NLP) models and algorithms. The resulting data is the aggregated and returned in a standardized format.
 
 ## 1. How It Works
+
 ### 1.1. Statistical Natural Language Processing Models
-pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*. All of these models were combined into a single model known as *ahadith*.
+
+pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*.
 
 The models were trained on manually annotated ahadith by the Saudi Arabian *[Permanent Committee for Scholarly Research and Ifta](https://sunnah.alifta.gov.sa/)*. Due to copyright, the data used to train the models cannot be reproduced. The models themselves, however, are not copyrighted (except under our own GNU GPLv3 license) as they come under the fair use doctrine.
 
@@ -15,19 +23,21 @@ The results of the final models are displayed in the table below:
 
 | Model | Model Type | Precision | Recall | F-Score |
 |--|--|--|--|--|
-| Rawa  | Named Entity Recognition | 98.96 | 98.91 | 98.94 |
-| Asl   | Text Classification |  |  | 97.78 |
+| Rawa  | Named Entity Recognition | 98.88 | 99 | 98.94 |
+| Asl   | Text Classification |  |  | 97.82 |
 
 ### 1.2. Asnad Reconstruction Algorithm
+
 To ensure that the names extracted by the *rawa* model are accurate, and to also identify the relationships of such narrators, a custom asnad reconstruction algorithm is employed.
 
 A pre-processor first uses [Motaz Saad](https://github.com/motazsaad)'s '[split-waw-arabic](https://github.com/motazsaad/split-waw-arabic)' method to identify and add whitespaces after the word 'وَ.'
 
-The algorithm then post-processes the data returned by the *ahadith* model. It first assumes that the matn begins at the last occurance of a narrator's name. The terms joining narrators are then standardized. There are two possible relationships recognized by the algorithm: A **from** B, and, A **from** B **and** C. Thus, where a term joins two or more narrators to a single narratee, that narratee will have multiple 'parent' narrators.
+The algorithm then post-processes the data returned by the *rawa* model. It first assumes that the matn begins at the last occurance of a narrator's name. The terms joining narrators are then standardized. There are two possible relationships recognized by the algorithm: A **from** B, and, A **from** B **and** C. Thus, where a term joins two or more narrators to a single narratee, that narratee will have multiple 'parent' narrators.
 
 Finally, to deal with misassignments by the *rawa* model, a set of common joining terms is used to ensure that a narrator's name is not, or does not contain, a joining term.
 
 ## 2. Installation
+
 pyHadith is available on pip. You can install pyHadith using the following command:
 
     pip install pyHadith
@@ -36,18 +46,21 @@ The following python packages will also be automatically installed as dependenci
 
 | Package | Version | Description |
 |--|--|--|
-| [spaCy](https://github.com/explosion/spaCy) | 2.2.4 | Used to interact with the *ahadith* model.
+| [spaCy](https://github.com/explosion/spaCy) | 2.2.4 | Used to interact with the *rawa* and *asl* models.
 | [pyArabic](https://github.com/linuxscout/pyarabic) | >= 0.6.7 | Used to remove diacritics from arabic strings.
 | [nltk](https://github.com/nltk/nltk) | >= 3.4.5 | Used to tokenize arabic strings.
 
 ## 3. Usage
+
 ### 3.1. Import pyHadith
+
 The first step in using pyHadith is to import the package to your code. You can do so with the following line:
 
     # Import the pyHadith package.
     import pyHadith
 
 ### 3.2. Deconstruct a Hadith
+
 To deconstruct a hadith, you must first create a 'hadith' object with the hadith module. This requires the passing of a single argument, a UTF-8 encoded Arabic text with diacritics.
 
 The code below demonstrates how a 'hadith' object can be created:
@@ -89,4 +102,5 @@ A 'narrator' object in the 'narrators' list will contain the following attribute
 | parents | List | A list of the ids of the narrator's parents within the isnad. |
 
 ## 4. License
+
 pyHadith is licensed under [GPLv3](https://github.com/umarbutler/pyhadith/blob/master/LICENSE). pyArabic, spaCy and NLTK are licensed under [GPLv3](https://github.com/linuxscout/pyarabic/blob/master/LICENSE), [MIT](https://github.com/explosion/spaCy/blob/master/LICENSE), and [Apache 2.0](https://github.com/nltk/nltk/blob/develop/LICENSE.txt), respectively. These licenses are all GPL compatible.

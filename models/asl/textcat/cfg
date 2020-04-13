@@ -1,0 +1,11 @@
+{
+  "exclusive_classes":true,
+  "architecture":"bow",
+  "positive_label":"khabar",
+  "labels":[
+    "khabar",
+    "athar"
+  ],
+  "pretrained_vectors":null,
+  "pretrained_dims":null
+}
