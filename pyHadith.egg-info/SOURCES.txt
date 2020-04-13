@@ -1,0 +1,8 @@
+README.md
+setup.cfg
+setup.py
+pyHadith.egg-info/PKG-INFO
+pyHadith.egg-info/SOURCES.txt
+pyHadith.egg-info/dependency_links.txt
+pyHadith.egg-info/requires.txt
+pyHadith.egg-info/top_level.txt
