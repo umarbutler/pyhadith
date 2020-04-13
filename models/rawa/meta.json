@@ -1,0 +1,46 @@
+{
+  "lang":"ar",
+  "name":"model",
+  "version":"0.0.2",
+  "spacy_version":">=2.2.4",
+  "description":"A NER model trained on 29,288 (5,784 of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
+  "author":"Umar Butler",
+  "email":"umar@umarbutler.com",
+  "url":"https://github.com/umarbutler/pyhadith/",
+  "license":"GPLv3",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":"spacy_pretrained_vectors"
+  },
+  "pipeline":[
+    "ner"
+  ],
+  "factories":{
+    "ner":"ner"
+  },
+  "labels":{
+    "ner":[
+      "RAWINAME"
+    ]
+  },
+  "accuracy":{
+    "ents_f":98.9459961382,
+    "ents_p":98.8888342593,
+    "ents_r":99.0032241392,
+    "ents_per_type":{
+      "RAWINAME":{
+        "p":98.8888342593,
+        "r":99.0032241392,
+        "f":98.9459961382
+      }
+    },
+    "token_acc":99.993094621
+  },
+  "speed":{
+    "cpu":30175.7530838177,
+    "gpu":20194.3151326822,
+    "nwords":405481
+  }
+}
