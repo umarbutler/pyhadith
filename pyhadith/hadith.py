@@ -5,23 +5,49 @@ import pyhadith.helpers as helpers
 import json
 
 class Hadith:
-	"""Deconstructs a given hadith, creating 'raw', 'clean', 'isnad', 'matn' and 'category' attributes.
+	"""Deconstructs and standardizes ahadith.
 	Initialization requires the passing of a single argument (an arabic unicode encoded string with diacritics which is the text of a hadith).
 	You may optionally pass your own list of arabic words (used to detect whether a token contains the arabic word 'wa'), or else, an internal words list will be used."""
 	def __init__(self, raw, words=None):
 		self.raw = raw
 
-		# Default to our own interal words list.
+		# Default to our own internal words list.
 		if words == None:
-			words = helpers.arabicWords()
+			self.words = helpers.arabicWords()
 
-		self.clean = helpers.clean(self.raw, words)
+		# Preproccess the raw text.
+		self.clean = helpers.preprocess(self.raw, self.words)
+		
+		# Init vars.
+		self.matn = None
+		self.isnad = None
+		self.category = None
 
-		# Use helpers.ahadith to extract narrators from, reconstruct the isand of, and categorize, the hadith.
-		hadith = helpers.ahadith(self.clean, words)
+	def deconstruct(self):
+		"""Deconstructs a hadith into a matn and an isnad. Creates 'isnad' and 'matn' attributes."""
+		# Use helpers.deconstruct to deconstruct the hadith.
+		data = helpers.deconstruct(self.clean, self.words)
 
 		# Set internal attributes.
-		self.isnad = hadith['isnad']
-		self.matn = hadith['matn']
-		self.category = hadith['category']
+		self.isnad = data[0]
+		self.matn = data[1]
+		
+		return True
+
+	def categorize(self):
+		"""Categorizes a hadith as either an atar or a khabar."""
+		# Uses helpers.categorize to categorize the hadith.
+		data = helpers.categorize(self.clean)
+		self.category = {
+			"name" : data[0],
+			"score" : data[1]
+		}
+
+	def treeify(self):
+		"""Reconstructs a hadith's isnad, creating a tree-like data structure stored in the 'tree' attribute."""
+		# Uses helpers.treeify to reconstruct the hadith's isnad.
+		self.tree = helpers.treeify(self.isnad, self.words)
 	
+	self.deconstruct()
+	self.categorize()
+	self.treeify()
