@@ -1,7 +1,7 @@
 # pyHadith
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) 
 [![PyUp](https://pyup.io/repos/github/umarbutler/pyhadith/shield.svg)](https://pyup.io/account/repos/github/umarbutler/pyhadith/yt2mp3/) 
-[![PyPi Version](https://img.shields.io/pypi/v/yt2mp3.svg)](https://pypi.python.org/pypi/yt2mp3/) 
+[![PyPi Version](https://img.shields.io/pypi/v/pyhadith.svg)](https://pypi.python.org/pypi/pyhadith/) 
 [![Python Versions](https://img.shields.io/pypi/pyversions/yt2mp3.svg)](https://pypi.python.org/pypi/yt2mp3/)
 
 pyHadith is a python package which automatically segments and categorizes ahadith.
