@@ -13,7 +13,7 @@ The package works by feeding raw text to custom natural language processing (NLP
 
 ### 1.1. Statistical Natural Language Processing Models
 
-pyHadith uses three statistical natural language processing (NLP) models to deconstruct and analyze ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*, which extracts the names of narrators; a Named Entity Recognition (NER) model, known as *hawiya*, which standardizes the identities of narrators, assigning them unique IDs; and, a Text Classification model, known as *asl*, which categorizes ahadith as either [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature) or [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature).
+pyHadith uses three statistical natural language processing (NLP) models to deconstruct and analyze ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*, which extracts the names of narrators; a Named Entity Recognition (NER) model, known as *hawiya*, which standardizes the identities of narrators, assigning them unique IDs; and, a Text Classification model, known as *asl*, which categorizes ahadith as either [atar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature) or [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature).
 
 While both the *rawa* and *asl* models require the passing of an entire hadith, the *hawiya* model only requires an isnad.
 
@@ -107,7 +107,7 @@ Once a hadith object is created, the following attributes will become available:
 | clean | String | The cleaned raw text. |
 | matn | Object | An object containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the matn. |
 | isnad | Object | An object containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the isnad, along with a 'narrators' list which contains narrator objects (discussed later). |
-| category | Object | An object containing the 'label' (either 'athar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
+| category | Object | An object containing the 'label' (either 'atar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
 
 A 'narrator' object in the 'narrators' list will contain the following attributes:
 
