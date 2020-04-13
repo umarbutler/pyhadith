@@ -5,7 +5,7 @@ The package works by feeding raw text to custom natural language processing (NLP
 
 ## 1. How It Works
 ### 1.1. Statistical Natural Language Processing Models
-pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*. All of these models were combined into a single model known as *ahadith*.
+pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*.
 
 The models were trained on manually annotated ahadith by the Saudi Arabian *[Permanent Committee for Scholarly Research and Ifta](https://sunnah.alifta.gov.sa/)*. Due to copyright, the data used to train the models cannot be reproduced. The models themselves, however, are not copyrighted (except under our own GNU GPLv3 license) as they come under the fair use doctrine.
 
@@ -23,7 +23,7 @@ To ensure that the names extracted by the *rawa* model are accurate, and to also
 
 A pre-processor first uses [Motaz Saad](https://github.com/motazsaad)'s '[split-waw-arabic](https://github.com/motazsaad/split-waw-arabic)' method to identify and add whitespaces after the word 'وَ.'
 
-The algorithm then post-processes the data returned by the *ahadith* model. It first assumes that the matn begins at the last occurance of a narrator's name. The terms joining narrators are then standardized. There are two possible relationships recognized by the algorithm: A **from** B, and, A **from** B **and** C. Thus, where a term joins two or more narrators to a single narratee, that narratee will have multiple 'parent' narrators.
+The algorithm then post-processes the data returned by the *rawa* model. It first assumes that the matn begins at the last occurance of a narrator's name. The terms joining narrators are then standardized. There are two possible relationships recognized by the algorithm: A **from** B, and, A **from** B **and** C. Thus, where a term joins two or more narrators to a single narratee, that narratee will have multiple 'parent' narrators.
 
 Finally, to deal with misassignments by the *rawa* model, a set of common joining terms is used to ensure that a narrator's name is not, or does not contain, a joining term.
 
@@ -36,7 +36,7 @@ The following python packages will also be automatically installed as dependenci
 
 | Package | Version | Description |
 |--|--|--|
-| [spaCy](https://github.com/explosion/spaCy) | 2.2.4 | Used to interact with the *ahadith* model.
+| [spaCy](https://github.com/explosion/spaCy) | 2.2.4 | Used to interact with the *rawa* and *asl* models.
 | [pyArabic](https://github.com/linuxscout/pyarabic) | >= 0.6.7 | Used to remove diacritics from arabic strings.
 | [nltk](https://github.com/nltk/nltk) | >= 3.4.5 | Used to tokenize arabic strings.
 
