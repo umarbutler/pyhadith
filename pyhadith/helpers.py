@@ -15,18 +15,13 @@ except:
 import csv
 import pyarabic.araby as araby
 
-def multReplace(text, tokens, rep):
-	""" Replaces a list of tokens ('tokens') within a string with another string ('rep')."""
-	for token in tokens:
-		text = text.replace(token, rep)
-	return text
-
-# This function cleans a text so that it may be processed later by the statistical models.
-def clean(text, words):
+# This function preprocesses a text so that it may be processed later by the statistical models.
+def preprocess(text, words):
 	"""Returns a string without punctuation, numbers, additional whitespace. Also adds whitespace before the arabic word 'wa' (and)."""
 	# A pre-defined list of tokens which must be removed from the text.
 	reps = ['.','/','<','>','?','؟','-','[',']','!',':','1','2','3','4','5','6','7','8','9','0','{','}','"',"'",'(',')',',','،','\n','\t']
-	text = multReplace(text, reps, ' ')
+	for rep in reps:
+		text = text.replace(rep, ' ')
 	# Get rid of extra white space.
 	text = " ".join(text.split())
 	tokens = word_tokenize(text)
@@ -81,8 +76,66 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
+def deconstruct(text):
+	"""Deconstructs a hadith into a matn and an isnad, using the 'rawa' model. Returns matn and isnad objects."""
+	
+	doc = connector.process(text, 'rawa')
+
+	isnad = {
+			"raw" : text, # Defaults to entire text.
+			"start_char" : 0,
+			"end_char" : len(text)-1,
+			"narrators" : []
+		}
+	
+	matn = {
+			"raw" : "",
+			"start_char" : None,
+			"end_char" : None,
+		}
+	
+	# Set a closed class of stemmed join terms.
+	joinTerms = ['حدث','عن','قال','ثنا','خبر','نا','وقل','نبأ','ان','انا', 'قلا','انه','سمع','أخبر','يقل','وقل','غدد','قرء','أصب',
+	'قلت','مرو','عنى','بمك','وعن','في','بمك','كوف','ملء','ذكر','من','لفظ','او','وهذا','هذا', 'كلهم','تقل','وكانت','كان']
+	# Add entities found by spaCy to isnad['narrators'].
+	for ent in doc.ents:
+		entText = ent.text
+		label_ = ent.label_
+		start_char = ent.start_char
+		end_char = ent.end_char
+		add = True
+
+		# Deal with cases where first word of ent is a join term.
+		stemmer = ISRIStemmer()
+		words = (" ".join(entText.split())).split(" ")
+		firstWord = words[0]
+		firstStem = stemmer.stem(araby.strip_tashkeel(firstWord))
+		if firstWord in joinTerms:
+			# Don't add this ent if its in the join terms AND its only one word.
+			if len(words) == 1:
+				add = False
+			else:
+				del words[0]
+				entText = " ".join(words)
+				start_char = start_char+len(words)
+				end_char = end_char+len(end_char)
+		# Add to isnad['narrators'] if there is a still name after having removed join terms.
+		if add == True:
+			isnad['narrators'].append({'text' : entText, 'label_' : label_,'start_char' : start_char, 'end_char' : end_char})
+	
+	# Split the hadith into a 'isnad' and 'matn' at the last occurrence of narrator's name.
+	lastIsnadEnd = len(text)-1
+	for ent in doc.ents:
+		lastIsnadEnd = ent.end_char
+	if (lastIsnadEnd != len(text)-1):
+		hadith['isnad']['raw'] = text[:lastIsnadEnd]
+		hadith['isnad']['end_char'] = lastIsnadEnd
+		hadith['matn']['raw'] = text[lastIsnadEnd:]
+		hadith['matn']['start_char'] = lastIsnadEnd
+		hadith['matn']['end_char'] = len(text)-1
+
 def ahadith(text, words):
-	"""Uses the rawa and asl spaCy models to return a deconstructed and standardised hadith object."""
+	"""Uses the rawa and asl spaCy models to return a deconstructed and standardized hadith object."""
 
 	doc = connector.process(text, 'rawa')
 	# Init the hadith object.
@@ -110,7 +163,7 @@ def ahadith(text, words):
 		hadith['category']['name'] = 'khabar'
 		hadith['category']['score'] = catsDoc.cats['khabar']
 	
-	# Segment the hadith into an isnad at the last occurance of a narrator's name.
+	# Segment the hadith into an isnad at the last occurrence of a narrator's name.
 	lastIsnadEnd = len(text)-1
 	for ent in doc.ents:
 		lastIsnadEnd = ent.end_char
