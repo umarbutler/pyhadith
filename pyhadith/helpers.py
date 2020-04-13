@@ -82,9 +82,9 @@ def isWa(token, words):
 	return False
 
 def ahadith(text, words):
-	"""Uses the ahadith spaCy model to return a deconstructed and standardised hadith object."""
+	"""Uses the rawa and asl spaCy models to return a deconstructed and standardised hadith object."""
 
-	doc = connector.process(text, 'ahadith')
+	doc = connector.process(text, 'rawa')
 	# Init the hadith object.
 	hadith = {
 		"isnad" : {
@@ -101,13 +101,14 @@ def ahadith(text, words):
 		"category" : {"name" :"", "score" : ""},
 	}
 
+	catsDoc = connector.process(text, 'asl')
 	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
-	if doc.cats['athar'] > doc.cats['khabar']:
+	if catsDoc.cats['athar'] > catsDoc.cats['khabar']:
 		hadith['category']['name'] = 'athar'
-		hadith['category']['score'] = doc.cats['athar']
+		hadith['category']['score'] = catsDoc.cats['athar']
 	else:
 		hadith['category']['name'] = 'khabar'
-		hadith['category']['score'] = doc.cats['khabar']
+		hadith['category']['score'] = catsDoc.cats['khabar']
 	
 	# Segment the hadith into an isnad at the last occurance of a narrator's name.
 	lastIsnadEnd = len(text)-1
