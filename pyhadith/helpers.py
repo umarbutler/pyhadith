@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Helps in the pre-processing, analysis, post-processing and standardisation of ahadith."""
 
-import pyhadith.connector as connector
+from . import connector
 from nltk.stem.isri import ISRIStemmer
 # Import NTLK word_tokenize. If it fails, download 'punkt' and import again.
 try:
@@ -125,15 +125,15 @@ def deconstruct(text):
 			isnad['narrators'].append({'text' : entText, 'label_' : label_,'start_char' : start_char, 'end_char' : end_char})
 	
 	# Split the hadith into a 'isnad' and 'matn' at the last occurrence of narrator's name.
-	lastIsnadEnd = isnad['narrators'][len(isnad['narrators'])]['end_char']
+	lastIsnadEnd = isnad['narrators'][len(isnad['narrators'])-1]['end_char']
 	if (lastIsnadEnd != len(text)-1):
-		hadith['isnad']['raw'] = text[:lastIsnadEnd]
-		hadith['isnad']['end_char'] = lastIsnadEnd
-		hadith['matn']['raw'] = text[lastIsnadEnd:]
-		hadith['matn']['start_char'] = lastIsnadEnd
-		hadith['matn']['end_char'] = len(text)-1
+		isnad['raw'] = text[:lastIsnadEnd]
+		isnad['end_char'] = lastIsnadEnd
+		matn['raw'] = text[lastIsnadEnd:]
+		matn['start_char'] = lastIsnadEnd
+		matn['end_char'] = len(text)-1
 
-	return matn, isnad
+	return isnad, matn
 
 def categorize(text):
 	"""Uses the 'asl' model to categorize a hadith as either an atar or a khabar.
@@ -149,13 +149,14 @@ def categorize(text):
 		name = 'khabar'
 		score = doc.cats['khabar']
 	
-	return name, score
+	return {"name" : name, "score" : score}
 	
 def treeify(isnad, words):
 	"""Reconstructs the isnad of a given hadith.
 	Returns a tree-like data structure representing narrational relationships of narrators in the isnad."""
 	tree = []
 	ents = isnad['narrators']
+	text = isnad['raw']
 	# Create a In-Out list for tokens in the isnad.
 	narrators = []
 	IOisnad = []
