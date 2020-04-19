@@ -141,10 +141,10 @@ def categorize(text):
 
 	doc = connector.process(text, 'asl')
 
-	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
-	if doc.cats['athar'] > doc.cats['khabar']:
+	# Set the category to be atar if the atar score is greater than the khabar score, or else default to khabar.
+	if doc.cats['atar'] > doc.cats['khabar']:
 		name = 'atar'
-		score = doc.cats['athar']
+		score = doc.cats['atar']
 	else:
 		name = 'khabar'
 		score = doc.cats['khabar']

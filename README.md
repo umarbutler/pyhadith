@@ -13,7 +13,7 @@ The package works by feeding raw text to custom natural language processing (NLP
 
 ### 1.1. Statistical Natural Language Processing Models
 
-pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*.
+pyHadith uses two statistical natural language processing (NLP) models to extract narrators from, and categorize (i.e. [atar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature), [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)), ahadith. These are: a Named Entity Recognition (NER) model, known as *rawa*; and, a Text Classification model, known as *asl*.
 
 The models were trained on manually annotated ahadith by the Saudi Arabian *[Permanent Committee for Scholarly Research and Ifta](https://sunnah.alifta.gov.sa/)*. Due to copyright, the data used to train the models cannot be reproduced. The models themselves, however, are not copyrighted (except under our own GNU GPLv3 license) as they come under the fair use doctrine.
 
