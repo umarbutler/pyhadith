@@ -21,7 +21,7 @@ class Hadith:
 		else:
 			self.words = words 
 		
-		self.clean = helpers.preprocess(self.raw, words)
+		self.clean = helpers.preprocess(self.raw, self.words)
 		
 	def deconstruct(self):
 		"""Deconstructs the hadith into a 'matn' and an 'isnad', creating the 'matn' and 'isnad' attributes."""

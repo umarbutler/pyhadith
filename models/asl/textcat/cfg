@@ -4,7 +4,7 @@
   "positive_label":"khabar",
   "labels":[
     "khabar",
-    "athar"
+    "atar"
   ],
   "pretrained_vectors":null,
   "pretrained_dims":null

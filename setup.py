@@ -19,7 +19,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     keywords='ahadith hadith isnad nlp arabic',
     classifiers=[
-		"Development Status :: 2 - Pre-Alpha",
+		"Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
 		"Intended Audience :: Science/Research",

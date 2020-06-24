@@ -19,7 +19,9 @@ import pyarabic.araby as araby
 def preprocess(text, words):
 	"""Returns a string without punctuation, numbers, additional whitespace. Also adds whitespace before the arabic word 'wa' (and)."""
 	# A pre-defined list of tokens which must be removed from the text.
-	reps = ['.','/','<','>','?','؟','-','[',']','!',':','1','2','3','4','5','6','7','8','9','0','{','}','"',"'",'(',')',',','،','\n','\t']
+	reps = ['.','/','<','>','?','؟','-','[',']','!',':','1','2','3','4','5','6','7','8','9','0','{','}','"',"'",'(',')',',','،','\n','\t','ـ','_','|','@','#','$','%','^','&','*','+','=','\\',
+	'~','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',
+	'T','U','V','W','X','Y','Z']
 	for rep in reps:
 		text = text.replace(rep, ' ')
 	# Get rid of extra white space.
@@ -77,10 +79,8 @@ def isWa(token, words):
 	return False
 
 def deconstruct(text):
-	"""Deconstructs a hadith into a matn and an isnad, using the 'rawa' model.
+	"""Deconstructs a hadith into a matn and an isnad, using the 'ajza', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
-	
-	doc = connector.process(text, 'rawa')
 
 	isnad = {
 			"raw" : text, # Defaults to entire text.
@@ -95,43 +95,98 @@ def deconstruct(text):
 			"end_char" : None,
 		}
 	
+	ajzaDoc = connector.process(text, 'ajza')
+	musaidDoc = connector.process(text, 'musaid')
+
+	# Split the hadith into a 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
+
+	# Look for the last 'STARTMATN' tag.
+	tokenCounter = 0
+	ajzaBreak = None
+	
+	for token in ajzaDoc:
+		tokenCounter = tokenCounter+1
+		if token.tag_ == 'STARTMATN':
+			ajzaBreak = tokenCounter
+	
+	if ajzaBreak == None:
+		ajzaBreak = tokenCounter
+	
+	lastToken = tokenCounter
+	
+	# Look for the last narrator before the last 'STARTMATN' tag.
+	tokenCounter = 0
+	musaidBreak = None
+	musaidBreakChar = None
+	tokensWithoutNarrator = 0
+	for token in musaidDoc:
+		tokenCounter = tokenCounter+1
+		if tokenCounter <= ajzaBreak:
+			# Deal only with tokens that are classed as RAWINAME and are not '\u200f'.
+			if token.ent_type_ == 'RAWINAME' and token.text != '\u200f':
+				musaidBreak = tokenCounter+1
+				tokensWithoutNarrator = 0
+			else:
+				tokensWithoutNarrator = tokensWithoutNarrator+1
+		else:
+			break
+	
+	# Store the 'isnad' and 'matn' data.
+	tokenCounter = 0
+	lastChar = 0
+	if musaidBreak:
+		isnad['raw'] = []
+		matn['raw'] = []
+		for token in musaidDoc:
+			tokenCounter = tokenCounter+1
+			if tokenCounter > musaidBreak:
+				matn['raw'].append(token.text)
+			else:
+				isnad['raw'].append(token.text)
+		isnad['raw'] = " ".join(isnad['raw'])
+		isnad['start_char'] = 0
+		isnad['end_char'] = len(isnad['raw'])
+		matn['raw'] = " ".join(matn['raw'])
+		matn['star_char'] = isnad['end_char']
+		matn['end_char'] = len(text)
+
+	# Send the 'isnad' text to rawa.
+	rawaDoc = connector.process(isnad['raw'], 'rawa')
+
 	# Set a closed class of stemmed join terms.
 	joinTerms = ['حدث','عن','قال','ثنا','خبر','نا','وقل','نبأ','ان','انا', 'قلا','انه','سمع','أخبر','يقل','وقل','غدد','قرء','أصب',
 	'قلت','مرو','عنى','بمك','وعن','في','بمك','كوف','ملء','ذكر','من','لفظ','او','وهذا','هذا', 'كلهم','تقل','وكانت','كان']
+	# Set a closed class of excluded narrator names.
+	narratorNames = ['رضى الله عنهما','رضى','الله','عنهما','رضى الله عنهم','\u200f']
 	# Add entities found by spaCy to isnad['narrators'].
-	for ent in doc.ents:
+	for ent in rawaDoc.ents:
 		entText = ent.text
 		label_ = ent.label_
 		start_char = ent.start_char
 		end_char = ent.end_char
 		add = True
-
-		# Deal with cases where first word of ent is a join term.
-		stemmer = ISRIStemmer()
-		words = (" ".join(entText.split())).split(" ")
-		firstWord = words[0]
-		firstStem = stemmer.stem(araby.strip_tashkeel(firstWord))
-		if firstWord in joinTerms:
-			# Don't add this ent if its in the join terms AND its only one word.
-			if len(words) == 1:
-				add = False
-			else:
-				del words[0]
-				entText = " ".join(words)
-				start_char = start_char+len(words)
-				end_char = end_char+len(end_char)
-		# Add to isnad['narrators'] if there is a still name after having removed join terms.
-		if add == True:
-			isnad['narrators'].append({'text' : entText, 'label_' : label_,'start_char' : start_char, 'end_char' : end_char})
-	
-	# Split the hadith into a 'isnad' and 'matn' at the last occurrence of narrator's name.
-	lastIsnadEnd = isnad['narrators'][len(isnad['narrators'])-1]['end_char']
-	if (lastIsnadEnd != len(text)-1):
-		isnad['raw'] = text[:lastIsnadEnd]
-		isnad['end_char'] = lastIsnadEnd
-		matn['raw'] = text[lastIsnadEnd:]
-		matn['start_char'] = lastIsnadEnd
-		matn['end_char'] = len(text)-1
+		# Deal with empty narrators.
+		if " ".join(word_tokenize(entText)).replace(' ','').replace('\u200f','') != '':
+			# Deal with cases where first word of ent is a join term.
+			stemmer = ISRIStemmer()
+			words = (" ".join(entText.split())).split(" ")
+			firstWord = words[0]
+			firstStem = stemmer.stem(araby.strip_tashkeel(firstWord))
+			if firstWord in joinTerms:
+				# Don't add this ent if its in the join terms AND its only one word.
+				if len(words) == 1:
+					add = False
+				else:
+					del words[0]
+					entText = " ".join(words)
+					start_char = start_char+len(words)
+			# Deal with cases where the narrator name is an excluded name.
+			for excludedName in narratorNames:
+				if entText.replace(excludedName,'').replace(' ','') == '':
+					add = False
+			# Add to isnad['narrators'] if there is a still name after having removed join terms.
+			if add == True:
+				isnad['narrators'].append({'text' : entText, 'label_' : label_,'start_char' : start_char, 'end_char' : end_char})
 
 	return isnad, matn
 
