@@ -54,8 +54,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - *ahadith* [spaCy](https://spacy.io/) statistical model.
 - Ahadith deconstruction functionality.
-<<<<<<< HEAD
 - Asnad Reconstruction Algorithm integration.
-=======
-- Asnad Reconstruction Algorithm integration.
->>>>>>> v0.1.0

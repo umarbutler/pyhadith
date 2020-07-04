@@ -1,15 +1,9 @@
 {
   "lang":"ar",
   "name":"asl",
-<<<<<<< HEAD
-  "version":"0.0.2",
-  "spacy_version":">=2.2.4",
-  "description":"A textcat model trained on 29,288 (5,784 of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
-=======
   "version":"0.1.0",
   "spacy_version":">=2.2.4",
   "description":"A Text Classification model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
->>>>>>> v0.1.0
   "author":"Umar Butler",
   "email":"umar@umarbutler.com",
   "url":"https://github.com/umarbutler/pyhadith",
@@ -29,19 +23,6 @@
   "labels":{
     "textcat":[
       "khabar",
-<<<<<<< HEAD
-      "athar"
-    ]
-  },
-  "accuracy":{
-    "textcat_score":97.8292862399,
-    "token_acc":99.993094621
-  },
-  "speed":{
-    "cpu":172644.5769909946,
-    "gpu":null,
-    "nwords":405481
-=======
       "atar"
     ]
   },
@@ -53,6 +34,5 @@
     "cpu":184292.8041342449,
     "gpu":null,
     "nwords":1253574
->>>>>>> v0.1.0
   }
 }

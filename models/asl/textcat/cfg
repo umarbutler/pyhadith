@@ -4,11 +4,7 @@
   "positive_label":"khabar",
   "labels":[
     "khabar",
-<<<<<<< HEAD:models/asl/textcat/cfg
-    "athar"
-=======
     "atar"
->>>>>>> v0.1.0:models/asl/textcat/cfg
   ],
   "pretrained_vectors":null,
   "pretrained_dims":null

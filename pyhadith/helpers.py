@@ -78,14 +78,9 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
-<<<<<<< HEAD
-def ahadith(text, arabicwords):
-	"""Uses the rawa and asl spaCy models to return a deconstructed and standardised hadith object."""
-=======
 def deconstruct(text):
 	"""Deconstructs a hadith into a matn and an isnad, using the 'ajza', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
->>>>>>> v0.1.0
 
 	isnad = {
 			"raw" : text, # Defaults to entire text.
@@ -257,13 +252,8 @@ def treeify(isnad, words):
 			if narratorCount == 1:
 				parents = None
 			# If prev. item is OUT and is wa, assume parents of previous narrator.
-<<<<<<< HEAD
-			elif IOisnad[count-2]['label'] == 'OUT' and isWa(" ".join(IOisnad[count-2]['raw'].split()).split(' ')[0], arabicwords):
-				parents = hadith['isnad']['narrators'][narratorCount-2]['parents']
-=======
 			elif IOisnad[count-2]['label'] == 'OUT' and isWa(" ".join(IOisnad[count-2]['raw'].split()).split(' ')[0], words):
 				parents = tree[narratorCount-2]['parents']
->>>>>>> v0.1.0
 			# Else, look for parents.
 			else:
 				parents = []
@@ -282,7 +272,7 @@ def treeify(isnad, words):
 						if possibleCounter != len(possibleParents):
 							# If the succeeding item is RAWI, or is not Wa, break.
 							succParent = possibleParents[possibleCounter]
-							if succParent['label'] == 'RAWI' or isWa(" ".join(succParent['raw'].split()).split(' ')[0], arabicwords) == False:
+							if succParent['label'] == 'RAWI' or isWa(" ".join(succParent['raw'].split()).split(' ')[0], words) == False:
 								break
 				
 				# Assign parents.

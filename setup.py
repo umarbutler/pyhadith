@@ -30,5 +30,5 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=["spacy==2.2.4","nltk>=3.4.5","pyarabic>=0.6.7"],
     include_package_data=True,
-    download_url="https://github.com/umarbutler/pyhadith/archive/v0.0.3.tar.gz"
+    download_url="https://github.com/umarbutler/pyhadith/archive/v0.0.2-pre_alpha.tar.gz"
 )
