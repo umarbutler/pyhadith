@@ -7,7 +7,7 @@
 
 pyHadith is a python package which automatically segments and categorizes ahadith.
 
-The package works by feeding raw text to custom natural language processing (NLP) models and algorithms. The resulting data is the aggregated and returned in a standardized format.
+The package works by feeding raw text to custom natural language processing (NLP) models and algorithms. The resulting data is them aggregated and returned in a standardized format.
 
 ## 1. How It Works
 
