@@ -1,0 +1,38 @@
+{
+  "lang":"ar",
+  "name":"asl",
+  "version":"0.1.0",
+  "spacy_version":">=2.2.4",
+  "description":"A Text Classification model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
+  "author":"Umar Butler",
+  "email":"umar@umarbutler.com",
+  "url":"https://github.com/umarbutler/pyhadith",
+  "license":"GPLv3",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":"spacy_pretrained_vectors"
+  },
+  "pipeline":[
+    "textcat"
+  ],
+  "factories":{
+    "textcat":"textcat"
+  },
+  "labels":{
+    "textcat":[
+      "khabar",
+      "atar"
+    ]
+  },
+  "accuracy":{
+    "textcat_score":97.3172617173,
+    "token_acc":99.9913846331
+  },
+  "speed":{
+    "cpu":184292.8041342449,
+    "gpu":null,
+    "nwords":1253574
+  }
+}
