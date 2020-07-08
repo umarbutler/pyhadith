@@ -39,7 +39,7 @@ The pre-processor also uses [Motaz Saad](https://github.com/motazsaad)'s '[split
 
 ### 1.3. Rawa Post-Processor
 
-To ensure that the names extracted by the *rawa* model are accurate, a post-processor looks for common joining terms at the beginning of each name. If a common joining term is found, it is removed from the name.
+To ensure that the names extracted by the *rawa* model are accurate, a post-processor looks for common joining terms at the beginning of each name (i.e. where the word 'min' (meaning from) is included as part of the name of a narrator). If a common joining term is found, it is removed from the name.
 
 ### 1.4. Hadith Deconstruction Algorithm
 
