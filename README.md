@@ -115,8 +115,8 @@ The code below demonstrates how this is done:
 Once the function has been called, the following attributes will become available:
 | Attribute | Data Type | Description |
 |--|--|--|
-| matn | Object | An object containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the matn. |
-| isnad | Object | An object containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the isnad, along with a 'narrators' list which contains the names and character indices of narrators. |
+| matn | Dictionary | A dictionary containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the matn. |
+| isnad | Dictionary | A dictionary containing the 'raw' text, 'start_char' index (in the cleaned text), and 'end_char' index (in the cleaned text), of the isnad, along with a 'narrators' list which contains the names and character indices of narrators. |
 
 ### 3.4. Categorize a Hadith
 
@@ -134,7 +134,7 @@ Once the 'categorize' function has been called, the 'category' attribute will be
 
 | Attribute | Data Type | Description |
 |--|--|--|
-| category | Object | An object containing the 'name' (either 'atar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
+| category | Dictionary | A dictionary containing the 'name' (either 'atar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
 
 ### 3.5. Reconstruct an Isnad
 
@@ -148,11 +148,11 @@ The code below demonstrates how you can call the 'treeify' function:
     # Print the resulting attributes.
     print(x.tree)
 
-Once the 'treeify' function has been called, the 'tree' attribute will be created. This attribute is a list which contains 'narrator' objects.
+Once the 'treeify' function has been called, the 'tree' attribute will be created. This attribute is a list which contains 'narrator' dictionaries.
 
-A 'narrator' object in the 'tree' list will contain the following attributes:
+A 'narrator' dictionary in the 'tree' list will contain the following keys:
 
-| Attribute | Data Type | Description |
+| Key | Data Type | Description |
 |--|--|--|
 | id | Integer | A unique identifier number. |
 | name | String | The raw text of the narrator's name. |

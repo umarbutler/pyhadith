@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Fixed typos in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.1.1/README.md).
+- Fixed typos and errors in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.1.1/README.md).
 
 ## [0.1.0] - 2020-06-24
 
