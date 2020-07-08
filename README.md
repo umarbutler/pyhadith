@@ -134,7 +134,7 @@ Once the 'categorize' function has been called, the 'category' attribute will be
 
 | Attribute | Data Type | Description |
 |--|--|--|
-| category | Object | An object containing the 'label' (either 'atar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
+| category | Object | An object containing the 'name' (either 'atar' or 'khabar') and 'score' (from .5 to 1) of the assigned category. |
 
 ### 3.5. Reconstruct an Isnad
 
