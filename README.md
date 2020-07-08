@@ -24,10 +24,9 @@ The results of the final models are displayed in the table below:
 | Model | Model Type | Accuracy | Precision | Recall | F-Score |
 |--|--|--|--|--|--|
 | Asl   | Text Classification |  |  |  | 97.32 |
-| Ajza   | Text Classification | 99.48 |  |  |  |
+| Ajza   | Part-of-Speech Tagging | 99.48 |  |  |  |
 | Musaid   | Named Entity Recognition |  | 98.99 | 99.20 | 99.10 |
 | Rawa  | Named Entity Recognition |  | 99.05 | 99.44 | 99.25 |
-
 
 ### 1.2. Pre-Processor
 
