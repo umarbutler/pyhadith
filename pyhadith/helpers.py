@@ -147,7 +147,7 @@ def deconstruct(text):
 		isnad['start_char'] = 0
 		isnad['end_char'] = len(isnad['raw'])
 		matn['raw'] = " ".join(matn['raw'])
-		matn['star_char'] = isnad['end_char']
+		matn['start_char'] = isnad['end_char']
 		matn['end_char'] = len(text)
 
 	# Send the 'isnad' text to rawa.
