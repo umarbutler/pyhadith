@@ -98,7 +98,7 @@ def deconstruct(text):
 	ajzaDoc = connector.process(text, 'ajza')
 	musaidDoc = connector.process(text, 'musaid')
 
-	# Split the hadith into a 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
+	# Split the hadith into an 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
 
 	# Look for the last 'STARTMATN' tag.
 	tokenCounter = 0
@@ -139,7 +139,7 @@ def deconstruct(text):
 		matn['raw'] = []
 		for token in musaidDoc:
 			tokenCounter = tokenCounter+1
-			if tokenCounter > musaidBreak:
+			if tokenCounter >= musaidBreak:
 				matn['raw'].append(token.text)
 			else:
 				isnad['raw'].append(token.text)

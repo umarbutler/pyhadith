@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Corrected typos in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/v0.1.2/pyhadith/helpers.py).
+- Fixed bug in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/v0.1.2/pyhadith/helpers.py). The matn and isnad are now split at the last occurrence of a narrator name, preceding the last 'BEGINMATN' tag.
 
 ## [0.1.1] - 2020-07-08
 
