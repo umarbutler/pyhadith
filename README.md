@@ -167,3 +167,9 @@ The changelog for pyHadith is available in the [CHANGELOG.md](https://github.com
 ## 5. License
 
 pyHadith is licensed under [GPLv3](https://github.com/umarbutler/pyhadith/blob/master/LICENSE). pyArabic, spaCy and NLTK are licensed under [GPLv3](https://github.com/linuxscout/pyarabic/blob/master/LICENSE), [MIT](https://github.com/explosion/spaCy/blob/master/LICENSE), and [Apache 2.0](https://github.com/nltk/nltk/blob/develop/LICENSE.txt), respectively. These licenses are all GPL compatible.
+
+## 6. Citation
+
+You may cite pyHadith using the following citation:
+
+> Butler, U. (2020). PyHadith (Version 0.1.2) [Computer software]. Retrieved from https://pypi.org/project/pyHadith/0.1.2/
