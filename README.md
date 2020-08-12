@@ -42,7 +42,7 @@ To ensure that the names extracted by the *rawa* model are accurate, a post-proc
 
 ### 1.4. Hadith Deconstruction Algorithm
 
-To deconstruct a hadith into a matn and an isnad, a custom algorithm is employed. This algorithm relies on the *ajza* and *musaid* models. It first splits a matn at the last occurrence of a 'BEGINMATN' tag (identified by *ajza*). It then searches for narrators within text the before the last 'BEGINMATN' tag. If a narrator has not been found after 6 or more tokens, it assumes that the last narrator identified is the actual last narrator. All the text before the token immediately succeeding that narrator is then labelled as the isnad. The text after it is labelled the matn.
+To deconstruct a hadith into a matn and an isnad, a custom algorithm is employed. This algorithm relies on the *ajza* and *musaid* models. It first splits a hadith at the last occurrence of a 'BEGINMATN' tag (identified by *ajza*). It then searches for narrators within text the before the last 'BEGINMATN' tag. If a narrator has not been found after 6 or more tokens, it assumes that the last narrator identified is the actual last narrator. All the text before the token immediately succeeding that narrator is then labelled as the isnad. The text after it is labelled the matn.
 
 ### 1.5. Asnad Reconstruction Algorithm
 
