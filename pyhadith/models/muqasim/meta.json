@@ -1,9 +1,9 @@
 {
   "lang":"ar",
-  "name":"asl",
+  "name":"muqasim",
   "version":"0.1.0",
   "spacy_version":">=2.2.4",
-  "description":"A Text Classification model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
+  "description":"A Part-of-Speech tagging model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
   "author":"Umar Butler",
   "email":"umar@umarbutler.com",
   "url":"https://github.com/umarbutler/pyhadith",
@@ -15,24 +15,27 @@
     "name":"spacy_pretrained_vectors"
   },
   "pipeline":[
-    "textcat"
+    "tagger"
   ],
   "factories":{
-    "textcat":"textcat"
+    "tagger":"tagger"
   },
   "labels":{
-    "textcat":[
-      "khabar",
-      "atar"
+    "tagger":[
+      "INISNAD",
+      "INMATN",
+      "STARTISNAD",
+      "STARTMATN",
+      "_SP"
     ]
   },
   "accuracy":{
-    "textcat_score":97.3172617173,
+    "tags_acc":99.4822468095,
     "token_acc":99.9913846331
   },
   "speed":{
-    "cpu":184292.8041342449,
-    "gpu":null,
+    "cpu":33911.6765241578,
+    "gpu":20207.3540668318,
     "nwords":1253574
   }
 }

@@ -79,7 +79,7 @@ def isWa(token, words):
 	return False
 
 def deconstruct(text):
-	"""Deconstructs a hadith into a matn and an isnad, using the 'ajza', 'musaid' and 'rawa' models.
+	"""Deconstructs a hadith into a matn and an isnad, using the 'muqasim', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
 
 	isnad = {
@@ -95,22 +95,22 @@ def deconstruct(text):
 			"end_char" : None,
 		}
 	
-	ajzaDoc = connector.process(text, 'ajza')
+	muqasimDoc = connector.process(text, 'muqasim')
 	musaidDoc = connector.process(text, 'musaid')
 
 	# Split the hadith into an 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
 
 	# Look for the last 'STARTMATN' tag.
 	tokenCounter = 0
-	ajzaBreak = None
+	muqasimBreak = None
 	
-	for token in ajzaDoc:
+	for token in muqasimDoc:
 		tokenCounter = tokenCounter+1
 		if token.tag_ == 'STARTMATN':
-			ajzaBreak = tokenCounter
+			muqasimBreak = tokenCounter
 	
-	if ajzaBreak == None:
-		ajzaBreak = tokenCounter
+	if muqasimBreak == None:
+		muqasimBreak = tokenCounter
 	
 	lastToken = tokenCounter
 	
@@ -121,7 +121,7 @@ def deconstruct(text):
 	tokensWithoutNarrator = 0
 	for token in musaidDoc:
 		tokenCounter = tokenCounter+1
-		if tokenCounter <= ajzaBreak:
+		if tokenCounter <= muqasimBreak:
 			# Deal only with tokens that are classed as RAWINAME and are not '\u200f'.
 			if token.ent_type_ == 'RAWINAME' and token.text != '\u200f':
 				musaidBreak = tokenCounter+1
@@ -191,10 +191,10 @@ def deconstruct(text):
 	return isnad, matn
 
 def categorize(text):
-	"""Uses the 'asl' model to categorize a hadith as either an atar or a khabar.
-	Returns the label of the category and the score assigned to the categorization by the 'asl' model."""
+	"""Uses the 'masdar' model to categorize a hadith as either an atar or a khabar.
+	Returns the label of the category and the score assigned to the categorization by the 'masdar' model."""
 
-	doc = connector.process(text, 'asl')
+	doc = connector.process(text, 'masdar')
 
 	# Set the category to be atar if the atar score is greater than the khabar score, or else default to khabar.
 	if doc.cats['atar'] > doc.cats['khabar']:
