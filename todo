@@ -1,0 +1,1 @@
+* When pyHadith is run for the first time, punkt is not installed. Mention this in README.md.
