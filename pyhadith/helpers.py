@@ -191,14 +191,15 @@ def segment(text):
 	return isnad, matn
 
 def categorize(text):
-	"""Uses the 'masdar' model to categorize a hadith as either an atar or a khabar.
+	"""Uses the 'masdar' model to categorize a hadith as either an athar or a khabar.
 	Returns the label of the category and the score assigned to the categorization by the 'masdar' model."""
 
 	doc = connector.process(text, 'masdar')
 
-	# Set the category to be atar if the atar score is greater than the khabar score, or else default to khabar.
+	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
+	# Note: The "atar" attribute was renamed to "athar". The name "atar", however, is still retained in the "masdar" model.
 	if doc.cats['atar'] > doc.cats['khabar']:
-		name = 'atar'
+		name = 'athar'
 		score = doc.cats['atar']
 	else:
 		name = 'khabar'

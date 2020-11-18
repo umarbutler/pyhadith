@@ -35,7 +35,7 @@ class Hadith:
 		return True
 
 	def categorize(self):
-		"""Categorizes a hadith as either an atar or a khabar."""
+		"""Categorizes a hadith as either an athar or a khabar."""
 		# Uses helpers.categorize to categorize the hadith.
 		data = helpers.categorize(self.clean)
 		self.category = {

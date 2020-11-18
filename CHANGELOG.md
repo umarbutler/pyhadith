@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed the *asl* model to *masdar*.
 - Renamed the *ajza* model to *muqasim*.
 - Renamed the *deconstruct* function to *segment*.
+- Renamed *atar* attribute to *athar*.
 
 ## [0.1.2] - 2020-07-10
 
