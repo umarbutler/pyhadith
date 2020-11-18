@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Handles the deconstruction of ahadith."""
+"""Handles the segmentation of ahadith."""
 
 import pyhadith.helpers as helpers
 import json
 
 class Hadith:
-	"""Deconstructs and standardizes ahadith.
+	"""Segments and standardizes ahadith.
 	Initialization requires the passing of a single argument (an arabic unicode encoded string with diacritics which is the text of a hadith).
 	You may optionally pass your own list of arabic words (used to detect whether a token contains the arabic word 'wa'), or else, an internal words list will be used."""
 	def __init__(self, raw, words=None):
@@ -23,10 +23,10 @@ class Hadith:
 		self.isnad = None
 		self.category = None
 
-	def deconstruct(self):
-		"""Deconstructs a hadith into a matn and an isnad. Creates 'isnad' and 'matn' attributes."""
-		# Use helpers.deconstruct to deconstruct the hadith.
-		data = helpers.deconstruct(self.clean, self.words)
+	def segment(self):
+		"""Segments a hadith into a matn and an isnad. Creates 'isnad' and 'matn' attributes."""
+		# Use helpers.segment to segment the hadith.
+		data = helpers.segment(self.clean, self.words)
 
 		# Set internal attributes.
 		self.isnad = data[0]
@@ -48,6 +48,6 @@ class Hadith:
 		# Uses helpers.treeify to reconstruct the hadith's isnad.
 		self.tree = helpers.treeify(self.isnad, self.words)
 	
-	self.deconstruct()
+	self.segment()
 	self.categorize()
 	self.treeify()

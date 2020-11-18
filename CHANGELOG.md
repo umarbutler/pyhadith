@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed bug with installing pyHadith by specifying that [README.md](INSERT_LINK) is encoded in UTF-8, in [setup.py](INSERT_LINK).
 - Renamed the *asl* model to *masdar*.
 - Renamed the *ajza* model to *muqasim*.
+- Renamed the *deconstruct* function to *segment*.
 
 ## [0.1.2] - 2020-07-10
 

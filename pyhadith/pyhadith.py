@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Handles the deconstruction of ahadith."""
+"""Handles the segmention of ahadith."""
 
 from . import helpers
 
 class Hadith:
-	"""Deconstructs a given hadith, creating 'raw', 'clean', 'isnad', 'matn' and 'category' attributes.
+	"""Segments a given hadith, creating 'raw', 'clean', 'isnad', 'matn' and 'category' attributes.
 	Initialization requires the passing of a single argument (an arabic unicode encoded string with diacritics which is the text of a hadith).
 	You may optionally pass your own list of arabic words (used to detect whether a token contains the arabic word 'wa'), or else, an internal words list will be used."""
 	def __init__(self, raw, words=None):
@@ -23,12 +23,12 @@ class Hadith:
 		
 		self.clean = helpers.preprocess(self.raw, self.words)
 		
-	def deconstruct(self):
-		"""Deconstructs the hadith into a 'matn' and an 'isnad', creating the 'matn' and 'isnad' attributes."""
-		deconstructed = helpers.deconstruct(self.clean)
+	def segment(self):
+		"""Segments the hadith into a 'matn' and an 'isnad', creating the 'matn' and 'isnad' attributes."""
+		segmented = helpers.segment(self.clean)
 
-		self.isnad = deconstructed[0]
-		self.matn = deconstructed[1]
+		self.isnad = segmented[0]
+		self.matn = segmented[1]
 		return True
 	
 	def categorize(self):
@@ -40,9 +40,9 @@ class Hadith:
 	def treeify(self):
 		"""Reconstructs the isnad of the hadith.
 		Creates a tree-like data structure stored in the 'tree' attribute.
-		Deconstruct must have been previously called before you may call treeify."""
+		Segment must have been previously called before you may call treeify."""
 		if self.isnad == None:
-			return {"error" : "There is no internal 'isnad' attribute to process. Did you forget to call the 'deconstruct' function?"}
+			return {"error" : "There is no internal 'isnad' attribute to process. Did you forget to call the 'segment' function?"}
 		
 		self.tree = helpers.treeify(self.isnad, self.words)
 		return True

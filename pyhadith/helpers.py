@@ -78,8 +78,8 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
-def deconstruct(text):
-	"""Deconstructs a hadith into a matn and an isnad, using the 'muqasim', 'musaid' and 'rawa' models.
+def segment(text):
+	"""Segments a hadith into a matn and an isnad, using the 'muqasim', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
 
 	isnad = {
