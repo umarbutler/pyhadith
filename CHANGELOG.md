@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed the *ajza* model to *muqasim*.
 - Renamed the *deconstruct* function to *segment*.
 - Renamed *atar* attribute to *athar*.
-- Changed installation requirements to disallow the use of newer versions of PyArabic (PyArabic version 0.6.7 is now required).
+- Changed installation requirements to disallow the use of newer versions of PyArabic (PyArabic version 0.6.10 is now required).
 
 ### Removed
 

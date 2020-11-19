@@ -28,7 +28,7 @@ setuptools.setup(
 		"Topic :: Text Processing"
     ],
     python_requires='>=3.6',
-    install_requires=["spacy==2.2.4","nltk==3.4.5","pyarabic==0.6.7"],
+    install_requires=["spacy==2.2.4","nltk==3.4.5","pyarabic==0.6.10"],
     include_package_data=True,
     download_url="https://github.com/umarbutler/pyhadith/archive/0.1.2.tar.gz"
 )
