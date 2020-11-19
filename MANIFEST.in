@@ -1,10 +1,10 @@
 include pyhadith/language/*
-include pyhadith/models/ajza/tagger/*
-include pyhadith/models/ajza/vocab/*
-include pyhadith/models/ajza/*
-include pyhadith/models/asl/textcat/*
-include pyhadith/models/asl/vocab/*
-include pyhadith/models/asl/*
+include pyhadith/models/muqasim/tagger/*
+include pyhadith/models/muqasim/vocab/*
+include pyhadith/models/muqasim/*
+include pyhadith/models/masdar/textcat/*
+include pyhadith/models/masdar/vocab/*
+include pyhadith/models/masdar/*
 include pyhadith/models/musaid/ner/*
 include pyhadith/models/musaid/vocab/*
 include pyhadith/models/musaid/*
