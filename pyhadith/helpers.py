@@ -21,7 +21,7 @@ def preprocess(text, words):
 	# A pre-defined list of tokens which must be removed from the text.
 	reps = ['.','/','<','>','?','؟','-','[',']','!',':','1','2','3','4','5','6','7','8','9','0','{','}','"',"'",'(',')',',','،','\n','\t','ـ','_','|','@','#','$','%','^','&','*','+','=','\\',
 	'~','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',
-	'T','U','V','W','X','Y','Z']
+	'T','U','V','W','X','Y','Z','\u200f']
 	for rep in reps:
 		text = text.replace(rep, ' ')
 	# Get rid of extra white space.

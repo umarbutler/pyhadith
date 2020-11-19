@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.3] - INSERT_DATE
 
+### Added
+
+- Added a filter for "\u200f" unicode character (right-to-left mark) in preprocess function of helpers.py.
+
 ### Changed
 
 - Fixed bug with installing pyHadith by specifying that [README.md](INSERT_LINK) is encoded in UTF-8, in [setup.py](INSERT_LINK).
