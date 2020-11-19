@@ -73,7 +73,7 @@ def isWa(token, words):
 		if ISRIStemmer().stem(token).replace(' ','')[0:1] != 'و':
 			return True
 		# Check if token w/o 'waw' (tashkeel stripped) is in Arabic words list, if so, it is 'وَ'.
-		if araby.stripTashkeel(token[2:]) in words:
+		if araby.strip_tashkeel(token[2:]) in words:
 			return True
 	# Default to not 'wa'.
 	return False
@@ -171,7 +171,7 @@ def segment(text):
 			stemmer = ISRIStemmer()
 			words = (" ".join(entText.split())).split(" ")
 			firstWord = words[0]
-			firstStem = stemmer.stem(araby.stripTashkeel(firstWord))
+			firstStem = stemmer.stem(araby.strip_tashkeel(firstWord))
 			if firstWord in joinTerms:
 				# Don't add this ent if its in the join terms AND its only one word.
 				if len(words) == 1:

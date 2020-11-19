@@ -15,7 +15,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed the *deconstruct* function to *segment*.
 - Renamed *atar* attribute to *athar*.
 - Changed installation requirements to disallow the use of newer versions of PyArabic (PyArabic version 0.6.10 is now required).
-- Changed calls to PyArabic in [helpers.py][INSERT_LINK], as Taha has updated the package to use the camel case naming convention (underscore was previously employed).
 
 ### Removed
 
