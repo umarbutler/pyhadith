@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed the *deconstruct* function to *segment*.
 - Renamed *atar* attribute to *athar*.
 
+### Removed
+
+- Removed non-Arabic words and characters from [words.ar](INSERT_LINK).
+
 ## [0.1.2] - 2020-07-10
 
 ### Changed
