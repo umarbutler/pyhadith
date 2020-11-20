@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Removed non-Arabic words and characters from [words.ar](INSERT_LINK).
+- Removed [hadith.py](INSERT_LINK) as it is no longer used by pyHadith.
 
 ## [0.1.2] - 2020-07-10
 
