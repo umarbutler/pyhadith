@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed *atar* attribute to *athar*.
 - Changed installation requirements to require PyArabic version 0.6.10 or greater.
 - Updated [README.md](INSERT_LINK) to reflect new changes.
+- Updated test.py to reflect new changes.
 
 ### Removed
 
