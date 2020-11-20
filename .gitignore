@@ -9,3 +9,5 @@ pyHadith.egg-info/requires.txt
 pyHadith.egg-info/SOURCES.txt
 pyHadith.egg-info/top_level.txt
 todo
+dist
+dist/pyHadith-0.1.3.tar.gz
