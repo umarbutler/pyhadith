@@ -2,14 +2,14 @@
 import setuptools
 
 # Set up long description
-with open("README.md", mode="r", encoding="utf8") as fh:
+with open("README.md", mode="r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 # Setuptools setup
 
 setuptools.setup(
     name="pyHadith",
-    version="0.1.2",
+    version="0.1.3",
     author="Umar Butler",
     author_email="umar@umarbutler.com",
     description="A package which automatically segments, categorizes and reconstructs the asnad of, ahadith.",
