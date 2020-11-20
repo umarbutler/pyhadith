@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Helps in the pre-processing, analysis, post-processing and standardisation of ahadith."""
 import pkg_resources
-from . import connector
 from nltk.stem.isri import ISRIStemmer
 # Import NTLK word_tokenize. If it fails, download 'punkt' and import again.
 try:
@@ -78,7 +77,7 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
-def segment(text):
+def segment(text, muqasim, musaid, rawa):
 	"""Segments a hadith into a matn and an isnad, using the 'muqasim', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
 
@@ -95,8 +94,8 @@ def segment(text):
 			"end_char" : None,
 		}
 	
-	muqasimDoc = connector.process(text, 'muqasim')
-	musaidDoc = connector.process(text, 'musaid')
+	muqasimDoc = muqasim(text)
+	musaidDoc = musaid(text)
 
 	# Split the hadith into an 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
 
@@ -151,7 +150,7 @@ def segment(text):
 		matn['end_char'] = len(text)
 
 	# Send the 'isnad' text to rawa.
-	rawaDoc = connector.process(isnad['raw'], 'rawa')
+	rawaDoc = rawa(isnad['raw'])
 
 	# Set a closed class of stemmed join terms.
 	joinTerms = ['حدث','عن','قال','ثنا','خبر','نا','وقل','نبأ','ان','انا', 'قلا','انه','سمع','أخبر','يقل','وقل','غدد','قرء','أصب',
@@ -190,11 +189,11 @@ def segment(text):
 
 	return isnad, matn
 
-def categorize(text):
+def categorize(text, masdar):
 	"""Uses the 'masdar' model to categorize a hadith as either an athar or a khabar.
 	Returns the label of the category and the score assigned to the categorization by the 'masdar' model."""
 
-	doc = connector.process(text, 'masdar')
+	doc = masdar(text, 'masdar')
 
 	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
 	# Note: The "atar" attribute was renamed to "athar". The name "atar", however, is still retained in the "masdar" model.

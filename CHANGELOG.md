@@ -10,20 +10,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added a filter for "\u200f" unicode character (right-to-left mark) in preprocess function of helpers.py.
+- Added a preprocess function in Hadith class. This will allow Hadith objects to be re-used.
 
 ### Changed
 
-- Fixed bug with installing pyHadith by specifying that [README.md](INSERT_LINK) is encoded in UTF-8, in [setup.py](INSERT_LINK).
+- Changed initialization function of Hadith class to load in necessary spaCy models and Arabic words list. This will improve performance by allowing a Hadith object to be re-used.
+- Fixed bug with installing pyHadith on Windows by specifying that [README.md](INSERT_LINK) is encoded in UTF-8, in [setup.py](INSERT_LINK).
 - Renamed the *asl* model to *masdar*.
 - Renamed the *ajza* model to *muqasim*.
-- Renamed the *deconstruct* function to *segment*.
+- Renamed the *deconstruct* function of Hadith class, to *segment*.
 - Renamed *atar* attribute to *athar*.
 - Changed installation requirements to require PyArabic version 0.6.10 or greater.
 
 ### Removed
 
+- Removed pre-processing of hadiths in initialization function of Hadith class. Pre-processing is now handled by a new function (named preprocess).
+- Removed the ability to use a custom Arabic words list.
 - Removed non-Arabic words and characters from [words.ar](INSERT_LINK).
-- Removed [hadith.py](INSERT_LINK) as it is no longer used by pyHadith.
+- Removed [hadith.py](INSERT_LINK).
+- Removed [connector.py](INSERT_LINK).
 
 ## [0.1.2] - 2020-07-10
 
