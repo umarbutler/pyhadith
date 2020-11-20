@@ -12,7 +12,7 @@ setuptools.setup(
     version="0.1.3",
     author="Umar Butler",
     author_email="umar@umarbutler.com",
-    description="A package which automatically segments, categorizes and reconstructs the asnad of, ahadith.",
+    description="A package which automatically segments, categorizes and, extracts narrators from, ahadith.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/umarbutler/pyhadith",
