@@ -15,36 +15,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Changed initialization function of Hadith class to load in necessary spaCy models and Arabic words list. This will improve performance by allowing a Hadith object to be re-used.
-- Fixed bug with installing pyHadith on Windows by specifying that [README.md](INSERT_LINK) is encoded in UTF-8, in [setup.py](INSERT_LINK).
+- Fixed bug with installing pyHadith on Windows by specifying that [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md) is encoded in UTF-8, in [setup.py](https://github.com/umarbutler/pyhadith/blob/master/setup.py).
 - Renamed the *asl* model to *masdar*.
 - Renamed the *ajza* model to *muqasim*.
 - Renamed the *deconstruct* function of Hadith class, to *segment*.
 - Renamed *atar* attribute to *athar*.
 - Changed installation requirements to require PyArabic version 0.6.10 or greater.
-- Updated [README.md](INSERT_LINK) to reflect new changes.
+- Updated [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md) to reflect new changes.
 - Updated test.py to reflect new changes.
 
 ### Removed
 
 - Removed pre-processing of hadiths in initialization function of Hadith class. Pre-processing is now handled by a new function (named preprocess).
 - Removed the ability to use a custom Arabic words list.
-- Removed non-Arabic words and characters from [words.ar](INSERT_LINK).
-- Removed [hadith.py](INSERT_LINK).
-- Removed [connector.py](INSERT_LINK).
+- Removed non-Arabic words and characters from [words.ar](https://github.com/umarbutler/pyhadith/blob/master/pyhadith/language/words.ar).
+- Removed hadith.py.
+- Removed connector.py.
 
 ## [0.1.2] - 2020-07-10
 
 ### Changed
 
-- Corrected typos in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/v0.1.2/pyhadith/helpers.py).
-- Fixed bug in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/v0.1.2/pyhadith/helpers.py). The matn and isnad are now split at the last occurrence of a narrator name, preceding the last 'BEGINMATN' tag.
+- Corrected typos in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/master/pyhadith/helpers.py).
+- Fixed bug in the deconstruct function of [helpers.py](https://github.com/umarbutler/pyhadith/blob/master/pyhadith/helpers.py). The matn and isnad are now split at the last occurrence of a narrator name, preceding the last 'BEGINMATN' tag.
 
 ## [0.1.1] - 2020-07-08
 
 ### Changed
 
-- Fixed typos and errors in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.1.1/README.md).
-- Fixed major issues with the importation of spaCy models and the arabic words list. [MANIFEST.in](https://github.com/umarbutler/pyhadith/blob/v0.1.1/MANIFEST.in) and [pkg_resources](https://setuptools.readthedocs.io/en/latest/pkg_resources.html) are now used to import and access data files.
+- Fixed typos and errors in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
+- Fixed major issues with the importation of spaCy models and the arabic words list. [MANIFEST.in](https://github.com/umarbutler/pyhadith/blob/master/MANIFEST.in) and [pkg_resources](https://setuptools.readthedocs.io/en/latest/pkg_resources.html) are now used to import and access data files.
 - Fixed the download_url for the pyhadith package.
 
 ## [0.1.0] - 2020-06-24
@@ -58,8 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The *Hadith* class is now available directly from the *pyhadith* package.
-- Updated P,R,F scores for the *ajza*, *asl*, *rawa* and *musaid* models in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.1.0/README.md).
-- Updated [README.md](https://github.com/umarbutler/pyhadith/blob/v0.1.0/README.md) to reflect changes in how ahadith are proccessed and deconstructed by pyHadith.
+- Updated P,R,F scores for the *ajza*, *asl*, *rawa* and *musaid* models in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
+- Updated [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md) to reflect changes in how ahadith are proccessed and deconstructed by pyHadith.
 - The *matn*, *isnad* and *category* attributes of the *Hadith* class are now only available from the new *deconstruct*, *treeify* and *categorize* functions.
 - Re-trained the *rawa* and *musaid* [spaCy](https://spacy.io/) statistical models.
 
@@ -77,7 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated P,R,F scores for the, now separate, *rawa* and *asl* models in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.0.2-pre_alpha/README.md).
+- Updated P,R,F scores for the, now separate, *rawa* and *asl* models in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
 - Changed version name to conform with [Semantic Versioning](https://semver.org/spec/v2.0.0.html) standards.
 
 ### Removed
@@ -88,7 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Fixed errors in the description of [spaCy](https://spacy.io/) statistical models in [README.md](https://github.com/umarbutler/pyhadith/blob/v0.0.2-pre_alpha/README.md).
+- Fixed errors in the description of [spaCy](https://spacy.io/) statistical models in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
 
 ## [0.0.1] - 2020-04-13
 
