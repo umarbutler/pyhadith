@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Helps in the pre-processing, analysis, post-processing and standardisation of ahadith."""
 import pkg_resources
-from . import connector
 from nltk.stem.isri import ISRIStemmer
 # Import NTLK word_tokenize. If it fails, download 'punkt' and import again.
 try:
@@ -21,7 +20,7 @@ def preprocess(text, words):
 	# A pre-defined list of tokens which must be removed from the text.
 	reps = ['.','/','<','>','?','؟','-','[',']','!',':','1','2','3','4','5','6','7','8','9','0','{','}','"',"'",'(',')',',','،','\n','\t','ـ','_','|','@','#','$','%','^','&','*','+','=','\\',
 	'~','`','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S',
-	'T','U','V','W','X','Y','Z']
+	'T','U','V','W','X','Y','Z','\u200f']
 	for rep in reps:
 		text = text.replace(rep, ' ')
 	# Get rid of extra white space.
@@ -78,8 +77,8 @@ def isWa(token, words):
 	# Default to not 'wa'.
 	return False
 
-def deconstruct(text):
-	"""Deconstructs a hadith into a matn and an isnad, using the 'ajza', 'musaid' and 'rawa' models.
+def segment(text, muqasim, musaid, rawa):
+	"""Segments a hadith into a matn and an isnad, using the 'muqasim', 'musaid' and 'rawa' models.
 	Returns matn and isnad objects."""
 
 	isnad = {
@@ -95,22 +94,22 @@ def deconstruct(text):
 			"end_char" : None,
 		}
 	
-	ajzaDoc = connector.process(text, 'ajza')
-	musaidDoc = connector.process(text, 'musaid')
+	muqasimDoc = muqasim(text)
+	musaidDoc = musaid(text)
 
 	# Split the hadith into an 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
 
 	# Look for the last 'STARTMATN' tag.
 	tokenCounter = 0
-	ajzaBreak = None
+	muqasimBreak = None
 	
-	for token in ajzaDoc:
+	for token in muqasimDoc:
 		tokenCounter = tokenCounter+1
 		if token.tag_ == 'STARTMATN':
-			ajzaBreak = tokenCounter
+			muqasimBreak = tokenCounter
 	
-	if ajzaBreak == None:
-		ajzaBreak = tokenCounter
+	if muqasimBreak == None:
+		muqasimBreak = tokenCounter
 	
 	lastToken = tokenCounter
 	
@@ -121,7 +120,7 @@ def deconstruct(text):
 	tokensWithoutNarrator = 0
 	for token in musaidDoc:
 		tokenCounter = tokenCounter+1
-		if tokenCounter <= ajzaBreak:
+		if tokenCounter <= muqasimBreak:
 			# Deal only with tokens that are classed as RAWINAME and are not '\u200f'.
 			if token.ent_type_ == 'RAWINAME' and token.text != '\u200f':
 				musaidBreak = tokenCounter+1
@@ -151,7 +150,7 @@ def deconstruct(text):
 		matn['end_char'] = len(text)
 
 	# Send the 'isnad' text to rawa.
-	rawaDoc = connector.process(isnad['raw'], 'rawa')
+	rawaDoc = rawa(isnad['raw'])
 
 	# Set a closed class of stemmed join terms.
 	joinTerms = ['حدث','عن','قال','ثنا','خبر','نا','وقل','نبأ','ان','انا', 'قلا','انه','سمع','أخبر','يقل','وقل','غدد','قرء','أصب',
@@ -190,15 +189,16 @@ def deconstruct(text):
 
 	return isnad, matn
 
-def categorize(text):
-	"""Uses the 'asl' model to categorize a hadith as either an atar or a khabar.
-	Returns the label of the category and the score assigned to the categorization by the 'asl' model."""
+def categorize(text, masdar):
+	"""Uses the 'masdar' model to categorize a hadith as either an athar or a khabar.
+	Returns the label of the category and the score assigned to the categorization by the 'masdar' model."""
 
-	doc = connector.process(text, 'asl')
+	doc = masdar(text, 'masdar')
 
-	# Set the category to be atar if the atar score is greater than the khabar score, or else default to khabar.
+	# Set the category to be athar if the athar score is greater than the khabar score, or else default to khabar.
+	# Note: The "atar" attribute was renamed to "athar". The name "atar", however, is still retained in the "masdar" model.
 	if doc.cats['atar'] > doc.cats['khabar']:
-		name = 'atar'
+		name = 'athar'
 		score = doc.cats['atar']
 	else:
 		name = 'khabar'

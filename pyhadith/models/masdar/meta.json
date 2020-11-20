@@ -1,9 +1,9 @@
 {
   "lang":"ar",
-  "name":"ajza",
+  "name":"masdar",
   "version":"0.1.0",
   "spacy_version":">=2.2.4",
-  "description":"A Part-of-Speech tagging model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
+  "description":"A Text Classification model trained on 102,153 (20% of which were used for evaluation) annotated ahadith taken from the Saudi Arabian Permanent Committee for Scholarly Research and Ifta.",
   "author":"Umar Butler",
   "email":"umar@umarbutler.com",
   "url":"https://github.com/umarbutler/pyhadith",
@@ -15,27 +15,24 @@
     "name":"spacy_pretrained_vectors"
   },
   "pipeline":[
-    "tagger"
+    "textcat"
   ],
   "factories":{
-    "tagger":"tagger"
+    "textcat":"textcat"
   },
   "labels":{
-    "tagger":[
-      "INISNAD",
-      "INMATN",
-      "STARTISNAD",
-      "STARTMATN",
-      "_SP"
+    "textcat":[
+      "khabar",
+      "atar"
     ]
   },
   "accuracy":{
-    "tags_acc":99.4822468095,
+    "textcat_score":97.3172617173,
     "token_acc":99.9913846331
   },
   "speed":{
-    "cpu":33911.6765241578,
-    "gpu":20207.3540668318,
+    "cpu":184292.8041342449,
+    "gpu":null,
     "nwords":1253574
   }
 }

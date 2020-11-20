@@ -1,48 +1,60 @@
 # -*- coding: utf-8 -*-
-"""Handles the deconstruction of ahadith."""
+"""Handles the segmentation of, categorization of, and extraction of narrators from, ahadith."""
 
 from . import helpers
 
+# Import packages necessary for the loading in of spaCy models.
+import spacy
+import pkg_resources
+
 class Hadith:
-	"""Deconstructs a given hadith, creating 'raw', 'clean', 'isnad', 'matn' and 'category' attributes.
-	Initialization requires the passing of a single argument (an arabic unicode encoded string with diacritics which is the text of a hadith).
-	You may optionally pass your own list of arabic words (used to detect whether a token contains the arabic word 'wa'), or else, an internal words list will be used."""
-	def __init__(self, raw, words=None):
-		# Set vars
-		self.raw = raw
+	"""Initializes a Hadith object by loading necessary spaCy models and Arabic words list.
+	No arguments are required for initialization."""
+	def __init__(self):
+		# Initialize necessary variables.
 		self.isnad = None
 		self.matn = None
 		self.category = None
 		self.tree = None
 
-		# Default to our own internal words list.
-		if words == None:
-			self.words = helpers.arabicWords()
-		else:
-			self.words = words 
-		
-		self.clean = helpers.preprocess(self.raw, self.words)
-		
-	def deconstruct(self):
-		"""Deconstructs the hadith into a 'matn' and an 'isnad', creating the 'matn' and 'isnad' attributes."""
-		deconstructed = helpers.deconstruct(self.clean)
+		# Load in masdar, muqasim, musaid and rawa models.
+		self.masdar = spacy.load(pkg_resources.resource_filename('pyhadith','models/masdar'))
+		self.muqasim = spacy.load(pkg_resources.resource_filename('pyhadith','models/muqasim'))
+		self.musaid = spacy.load(pkg_resources.resource_filename('pyhadith','models/musaid'))
+		self.rawa = spacy.load(pkg_resources.resource_filename('pyhadith','models/rawa'))
 
-		self.isnad = deconstructed[0]
-		self.matn = deconstructed[1]
+		# Load in words list.
+		self.words = helpers.arabicWords()
+
+	"""Preprocesses a hadith by cleaning it and storing it for use by other functions."""
+	def preprocess(self, raw):
+		self.raw = raw
+		self.clean = helpers.preprocess(self.raw, self.words)
+
+		return True
+
+	def segment(self):
+		"""Segments the hadith into a 'matn' and an 'isnad', creating the 'matn' and 'isnad' attributes.
+		Preprocess must have been previously called before you can call segment."""
+		segmented = helpers.segment(self.clean, self.muqasim, self.musaid, self.rawa)
+
+		self.isnad = segmented[0]
+		self.matn = segmented[1]
 		return True
 	
 	def categorize(self):
-		"""Categorizes the hadith as either an 'atar' or a 'khabar'.
-		The result is saved in the 'category' attribute."""
-		self.category = helpers.categorize(self.clean)
+		"""Categorizes the hadith as either an 'athar' or a 'khabar'.
+		The result is saved in the 'category' attribute.
+		Preprocess must have been previously called before you can call categorize."""
+		self.category = helpers.categorize(self.clean, self.masdar)
 		return True
 
 	def treeify(self):
 		"""Reconstructs the isnad of the hadith.
 		Creates a tree-like data structure stored in the 'tree' attribute.
-		Deconstruct must have been previously called before you may call treeify."""
+		Segment and preprocess must have been previously called before you may call treeify."""
 		if self.isnad == None:
-			return {"error" : "There is no internal 'isnad' attribute to process. Did you forget to call the 'deconstruct' function?"}
+			return {"error" : "There is no internal 'isnad' attribute to process. Did you forget to call the 'segment' function?"}
 		
 		self.tree = helpers.treeify(self.isnad, self.words)
 		return True

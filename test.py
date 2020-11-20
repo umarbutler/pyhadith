@@ -1,38 +1,40 @@
 # -*- coding: utf-8 -*-
 # Import the pyHadith package.
 import pyhadith
-# Set the hadith to be processed.
+# Create a 'Hadith' object.
+hadithObj = pyhadith.Hadith()
+# Set the hadith to be pre-processed.
 text = u'حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا أَبُو أَحْمَدَ، حَدَّثَنَا سُفْيَانُ، عَنْ يَزِيدَ أَبِي خَالِدٍ الدَّالاَنِيِّ، عَنْ رَجُلٍ، عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ، قَالَ صَنَعَ أَبُو الْهَيْثَمِ بْنُ التَّيْهَانِ لِلنَّبِيِّ صلى الله عليه وسلم طَعَامًا فَدَعَا النَّبِيَّ صلى الله عليه وسلم وَأَصْحَابَهُ فَلَمَّا فَرَغُوا قَالَ ‏"‏ أَثِيبُوا أَخَاكُمْ ‏"‏ ‏.‏ قَالُوا يَا رَسُولَ اللَّهِ وَمَا إِثَابَتُهُ قَالَ ‏"‏ إِنَّ الرَّجُلَ إِذَا دُخِلَ بَيْتُهُ فَأُكِلَ طَعَامُهُ وَشُرِبَ شَرَابُهُ فَدَعَوْا لَهُ فَذَلِكَ إِثَابَتُهُ ‏"‏ ‏.‏'
-# Create a 'Hadith' object using the text of the hadith.
-x = pyhadith.Hadith(text)
+# Pre-process the hadith.
+hadithObj.preprocess(text)
 # Print the resulting attributes.
 print({
-	"raw" : x.raw,
-	"clean" : x.clean
+	"raw" : hadithObj.raw,
+	"clean" : hadithObj.clean
 })
-# Call the 'deconstruct' function.
-x.deconstruct()
+# Call the 'segment' function.
+hadithObj.segment()
 # Print the resulting attributes.
 print({
-	"matn" : x.matn,
-	"isnad" : x.isnad
+	"matn" : hadithObj.matn,
+	"isnad" : hadithObj.isnad
 })
 # Call the 'categorize' function.
-x.categorize()
+hadithObj.categorize()
 # Print the resulting attributes.
-print(x.category)
+print(hadithObj.category)
 # Call the 'treeify' function.
-x.treeify()
+hadithObj.treeify()
 # Print the resulting attributes.
-print(x.tree)
+print(hadithObj.tree)
 # Store all of the available attributes.
 result = {
-	"raw" : x.raw,
-	"clean" : x.clean,
-	"matn" : x.matn,
-	"isnad" : x.isnad,
-	"category" : x.category,
-	"tree" : x.tree
+	"raw" : hadithObj.raw,
+	"clean" : hadithObj.clean,
+	"matn" : hadithObj.matn,
+	"isnad" : hadithObj.isnad,
+	"category" : hadithObj.category,
+	"tree" : hadithObj.tree
 }
 # Print all of the available attributes.
 print('All of the available attributes:\n',result)

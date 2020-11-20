@@ -2,17 +2,17 @@
 import setuptools
 
 # Set up long description
-with open("README.md", "r") as fh:
+with open("README.md", mode="r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 # Setuptools setup
 
 setuptools.setup(
     name="pyHadith",
-    version="0.1.2",
+    version="0.1.3",
     author="Umar Butler",
     author_email="umar@umarbutler.com",
-    description="A package which automatically segments, categorizes and reconstructs the asnad of, ahadith.",
+    description="A package which automatically segments, categorizes and, extracts narrators from, ahadith.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/umarbutler/pyhadith",
@@ -28,7 +28,7 @@ setuptools.setup(
 		"Topic :: Text Processing"
     ],
     python_requires='>=3.6',
-    install_requires=["spacy==2.2.4","nltk>=3.4.5","pyarabic>=0.6.7"],
+    install_requires=["spacy==2.2.4","nltk==3.4.5","pyarabic>=0.6.10"],
     include_package_data=True,
     download_url="https://github.com/umarbutler/pyhadith/archive/0.1.2.tar.gz"
 )
