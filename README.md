@@ -106,13 +106,13 @@ The code below demonstrates how you can preprocess a hadith:
 
     # Continue on from example code in 3.2.
     # Set the hadith to be pre-processed.
-    text = u'حَدَّثَنِي يَحْيَى، عَنْ مَالِكٍ، أَنَّهُ بَلَغَهُ أَنَّ سَعِيدَ بْنَ الْمُسَيَّبِ، وَسُلَيْمَانَ بْنَ يَسَارٍ، كَانَا يَقُولاَنِ عِدَّةُ الأَمَةِ إِذَا هَلَكَ عَنْهَا زَوْجُهَا شَهْرَانِ وَخَمْسُ لَيَالٍ ‏.‏'
+    text = u'حَدَّثَنَا مُحَمَّدُ بْنُ بَشَّارٍ، حَدَّثَنَا أَبُو أَحْمَدَ، حَدَّثَنَا سُفْيَانُ، عَنْ يَزِيدَ أَبِي خَالِدٍ الدَّالاَنِيِّ، عَنْ رَجُلٍ، عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ، قَالَ صَنَعَ أَبُو الْهَيْثَمِ بْنُ التَّيْهَانِ لِلنَّبِيِّ صلى الله عليه وسلم طَعَامًا فَدَعَا النَّبِيَّ صلى الله عليه وسلم وَأَصْحَابَهُ فَلَمَّا فَرَغُوا قَالَ ‏"‏ أَثِيبُوا أَخَاكُمْ ‏"‏ ‏.‏ قَالُوا يَا رَسُولَ اللَّهِ وَمَا إِثَابَتُهُ قَالَ ‏"‏ إِنَّ الرَّجُلَ إِذَا دُخِلَ بَيْتُهُ فَأُكِلَ طَعَامُهُ وَشُرِبَ شَرَابُهُ فَدَعَوْا لَهُ فَذَلِكَ إِثَابَتُهُ ‏"‏ ‏.‏'
     # Pre-process the hadith.
     hadithObj.preprocess(text)
     # Print the resulting attributes.
     print({
-        "raw" : x.raw,
-        "clean" : x.clean
+        "raw" : hadithObj.raw,
+        "clean" : hadithObj.clean
     })
 
 Once you have pre-processed a hadith, the following attributes will become available:
@@ -130,11 +130,11 @@ The code below demonstrates how this is done:
 
     # Continue on from example code in 3.3.
     # Call the 'segment' function.
-    x.segment()
+    hadithObj.segment()
     # Print the resulting attributes.
     print({
-        "matn" : x.matn,
-        "isnad" : x.isnad
+        "matn" : hadithObj.matn,
+        "isnad" : hadithObj.isnad
     })
 
 Once the function has been called, the following attributes will become available:
@@ -151,9 +151,9 @@ The code below demonstrates how you can call the function:
 
     # Continue on from example code in 3.4.
     # Call the 'categorize' function.
-    x.categorize()
+    hadithObj.categorize()
     # Print the resulting attributes.
-    print(x.category)
+    print(hadithObj.category)
 
 Once the 'categorize' function has been called, the 'category' attribute will become available.
 
@@ -169,9 +169,9 @@ The code below demonstrates how you can call the 'treeify' function:
 
     # Continue on from example code in 3.5.
     # Call the 'treeify' function.
-    x.treeify()
+    hadithObj.treeify()
     # Print the resulting attributes.
-    print(x.tree)
+    print(hadithObj.tree)
 
 Once the 'treeify' function has been called, the 'tree' attribute will be created. This attribute is a list which contains 'narrator' dictionaries.
 
