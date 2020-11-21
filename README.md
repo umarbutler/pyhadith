@@ -9,13 +9,13 @@ pyHadith is a python package for the automatic analysis of [ahadith](https://en.
 
 pyHadith performs three key functions: categorization (as either [athar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature) or [khabar](https://en.wikipedia.org/wiki/Hadith#Distinction_from_other_literature)); segmentation (of a hadith into a [matn](https://en.wikipedia.org/wiki/Hadith#Components) and an [isnad](https://en.wikipedia.org/wiki/Hadith#Components)); and, narrator identification/extraction (that is, the identification of the names of narrators within an isnad).
 
-As of the 18th of November 2020, pyHadith has been able to achieve the following percision, recall and F scores (functions were evaluated against a dataset of 20,430 manually annotated ahadith (more precisely, 1,322,035 tokens) (withheld from training)):
+As of the 21st of November 2020, pyHadith has been able to achieve the following percision, recall and F scores (functions were evaluated against a dataset of 20,430 manually annotated ahadith (more precisely, 1,322,035 tokens) (withheld from training)):
 
 | Function                           | Precision | Recall | F-Score |
 |------------------------------------|-----------|--------|---------|
 | Categorization                     | 0.8785    | 0.7889 | 0.8313  |
-| Segmentation                       | 0.9709    | 0.9961 | 0.9833  |
-| Narrator Identification/Extraction | 0.9706    | 0.9758 | 0.9732  |
+| Segmentation                       | 0.9935    | 0.9923 | 0.9929  |
+| Narrator Identification/Extraction | 0.9747    | 0.9747 | 0.9747  |
 
 ## 1. How It Works
 
@@ -31,8 +31,8 @@ The results of the final models are displayed in the table below:
 
 | Model | Model Type | Accuracy | Precision | Recall | F-Score |
 |--|--|--|--|--|--|
-| Asl | Text Classification | | | | 97.32 |
-| Ajza | Part-of-Speech Tagging | 99.48 | | | |
+| Masdar | Text Classification | | | | 97.32 |
+| Muqasim | Part-of-Speech Tagging | 99.48 | | | |
 | Musaid | Named Entity Recognition | | 98.99 | 99.20 | 99.10 |
 | Rawa | Named Entity Recognition | | 99.05 | 99.44 | 99.25 |
 
@@ -50,7 +50,7 @@ To ensure that the names extracted by the *rawa* model are accurate, a post-proc
 
 ### 1.4 Segmentation Algorithm
 
-To segment a hadith into a matn and an isnad, a custom algorithm is employed. This algorithm relies on the *muqasim* and *musaid* models. It first splits a hadith at the last occurrence of a "BEGINMATN" tag (identified by *muqasim*). It then searches for narrators within the text before the last "BEGINMATN" tag. If a narrator has not been found after 6 or more tokens, it assumes that the last narrator identified is the actual last narrator. All the text before the token immediately succeeding that narrator is then labelled as the isnad. The text after it is labelled the matn.
+To segment a hadith into a matn and an isnad, a custom algorithm is employed. This algorithm relies on the *muqasim* and *musaid* models. It first splits a hadith at the last occurrence of a "BEGINMATN" tag (identified by *muqasim*). It then searches for narrators within the text before the last "BEGINMATN" tag. If a narrator has not been found after 21 tokens, it assumes that the last narrator identified is the actual last narrator. All the text before the token immediately succeeding that narrator is then labelled as the isnad. The text after it is labelled the matn.
 
 ### 1.5 Asnad Reconstruction Algorithm
 
@@ -197,4 +197,4 @@ pyHadith is licensed under [GPLv3](https://github.com/umarbutler/pyhadith/blob/m
 
 You may cite pyHadith using the following citation:
 
-> Butler, U. (2020). PyHadith (Version 0.1.3) [Computer software]. Retrieved from https://pypi.org/project/pyHadith/0.1.3/
+> Butler, U. (2020). PyHadith (Version 0.1.4) [Computer software]. Retrieved from https://pypi.org/project/pyHadith/0.1.3/

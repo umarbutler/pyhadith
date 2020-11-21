@@ -9,7 +9,7 @@ with open("README.md", mode="r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pyHadith",
-    version="0.1.3",
+    version="0.1.4",
     author="Umar Butler",
     author_email="umar@umarbutler.com",
     description="A package which automatically segments, categorizes and, extracts narrators from, ahadith.",
@@ -30,5 +30,5 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=["spacy==2.2.4","nltk==3.4.5","pyarabic>=0.6.10"],
     include_package_data=True,
-    download_url="https://github.com/umarbutler/pyhadith/archive/0.1.2.tar.gz"
+    download_url="https://github.com/umarbutler/pyhadith/archive/v0.1.4.tar.gz"
 )

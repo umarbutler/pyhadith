@@ -97,8 +97,6 @@ def segment(text, muqasim, musaid, rawa):
 	muqasimDoc = muqasim(text)
 	musaidDoc = musaid(text)
 
-	# Split the hadith into an 'isnad' and 'matn' at the word succeeding the last narrator preceding the last 'STARTMATN' tag.
-
 	# Look for the last 'STARTMATN' tag.
 	tokenCounter = 0
 	muqasimBreak = None
@@ -114,6 +112,7 @@ def segment(text, muqasim, musaid, rawa):
 	lastToken = tokenCounter
 	
 	# Look for the last narrator before the last 'STARTMATN' tag.
+	# Also stop looking if 22 tokens processed without a narrator being found.
 	tokenCounter = 0
 	musaidBreak = None
 	musaidBreakChar = None
@@ -128,6 +127,9 @@ def segment(text, muqasim, musaid, rawa):
 			else:
 				tokensWithoutNarrator = tokensWithoutNarrator+1
 		else:
+			break
+		# If 22 tokens have been processed without a narrator being found, stop searching for a final narrator.
+		if tokensWithoutNarrator == 22:
 			break
 	
 	# Store the 'isnad' and 'matn' data.
