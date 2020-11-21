@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2020-11-21
+
+### Changed
+
+- Renamed the *asl* model to *masdar* in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
+- Renamed the *ajza* model to *muqasim*  in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
+
 ## [0.1.3] - 2020-11-20
 
 ### Added
