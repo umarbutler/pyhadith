@@ -9,8 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Fine-tuned segmentation algorithm, resulting in considerable improvements in precision, recall and F scores.
 - Renamed the *asl* model to *masdar* in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
 - Renamed the *ajza* model to *muqasim*  in [README.md](https://github.com/umarbutler/pyhadith/blob/master/README.md).
+- Updated download_url in setup.py as it was not updated in the last version update.
 
 ## [0.1.3] - 2020-11-20
 
